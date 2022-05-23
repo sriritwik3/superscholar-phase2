@@ -1,16 +1,18 @@
-const express = require('express');
-const bodyParser = require("body-parser");
+import express from "express";
+import bodyParser from "body-parser";
+import morgan from "morgan";
+import cors from "cors";
+import helmet from "helmet";
+import passport from "passport";
+import dotenv from 'dotenv';
+dotenv.config();
+import boardRoutes from "./routes/boards.route.js";
+import userRoutes from "./routes/users.route.js";
+import './config/database.js';
+
 const app = express();
-const morgan = require('morgan');
-const cors = require('cors');
-const helmet = require('helmet');
-require("dotenv").config();
-const boardRoutes = require('./routes/boards.route.js');
-const userRoutes = require('./routes/users.route.js');
 
-//const auth = require('./middlewares/middleware');
-
-
+app.use(passport.initialize());
 app.use(
     helmet(),
     morgan('dev'),
@@ -20,8 +22,8 @@ app.use(
         origin: 'http://localhost:3000',
     }),
 );
-
 app.use('/boards', boardRoutes);
 app.use('/users', userRoutes);
 
-module.exports = app;
+
+export default app;

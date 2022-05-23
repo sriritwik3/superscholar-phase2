@@ -1,5 +1,5 @@
-const request = require("supertest");
-const app = require("../index.js");
+import request from "supertest";
+import app from "../index.js";
 
 describe('Test POST /launches', () => {
     test('id for first created object must be 1 and status should always be 1. It should respond with 201 created status code.', async() => {

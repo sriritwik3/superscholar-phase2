@@ -1,7 +1,7 @@
-const sqlite3 = require('sqlite3');
-const db = require('../models/boardSchema.js');
+import sqlite3 from 'sqlite3';
+import db from '../models/boardSchema.js';
 
-module.exports.getAllBoards = (req, res, next) => {
+export const getAllBoards = (req, res, next) => {
     db.all('SELECT * FROM boards', [], (err, rows) => {
         if (err) {
             res.status(400).json({ error: err.message });
@@ -10,10 +10,11 @@ module.exports.getAllBoards = (req, res, next) => {
         //console.log(rows);
         res.status(200).json({ rows });
     });
+    console.log(global.isLoggedIn);
 };
 
 
-module.exports.addNewBoard = (req, res, next) => {
+export const addNewBoard = (req, res, next) => {
     const reqBody = req.body;
     //console.log(reqBody);
     if (!reqBody.title) {
@@ -37,7 +38,7 @@ module.exports.addNewBoard = (req, res, next) => {
 };
 
 
-module.exports.updateBoardByID = (req, res, next) => {
+export const updateBoardByID = (req, res, next) => {
     if (!req.body.stage) {
         res.status(400).json({ error: err.message });
         return;
@@ -72,7 +73,7 @@ module.exports.updateBoardByID = (req, res, next) => {
 };
 
 
-module.exports.getIndividualID = (req, res, next) => {
+export const getIndividualID = (req, res, next) => {
     const id = +req.params.id;
     db.get(`SELECT * FROM boards where id = ${id}`, [], function(err, row) {
         console.log(row);
@@ -85,7 +86,7 @@ module.exports.getIndividualID = (req, res, next) => {
 };
 
 
-module.exports.deleteBoardByID = (req, res, next) => {
+export const deleteBoardByID = (req, res, next) => {
     const { id } = req.params;
     db.run(`DELETE FROM boards WHERE id = ?`, +id, function(err, result) {
         if (err) {

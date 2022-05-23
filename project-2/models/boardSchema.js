@@ -1,4 +1,4 @@
-const sqlite3 = require('sqlite3');
+import sqlite3 from 'sqlite3';
 
 const db = new sqlite3.Database('./kanban_boards.db', (err) => {
     if (err) {
@@ -21,4 +21,4 @@ const db = new sqlite3.Database('./kanban_boards.db', (err) => {
     }
 });
 
-module.exports = db;
+export default db;

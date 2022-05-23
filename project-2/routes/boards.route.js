@@ -1,15 +1,18 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
     getAllBoards,
     addNewBoard,
     getIndividualID,
     updateBoardByID,
     deleteBoardByID,
-} = require('../controllers/boards.contoller.js');
+} from '../controllers/boards.contoller.js';
+import passport from "passport";
+
 const router = express.Router();
 
-router.route('/')
-    .get(getAllBoards)
+router
+    .route('/')
+    .get(passport.authenticate('jwt', { session: false }), getAllBoards)
     .post(addNewBoard);
 
 router.route('/:id')
@@ -17,4 +20,4 @@ router.route('/:id')
     .put(updateBoardByID)
     .delete(deleteBoardByID);
 
-module.exports = router;
+export default router;
