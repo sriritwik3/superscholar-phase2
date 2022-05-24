@@ -7,17 +7,20 @@ import {
     deleteBoardByID,
 } from '../controllers/boards.contoller.js';
 import passport from "passport";
+import { isAuthor } from '../middleware.js';
+import { isAuthenticated } from '../middleware.js';
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(passport.authenticate('jwt', { session: false }), getAllBoards)
-    .post(addNewBoard);
+    .get(getAllBoards)
+    .post(isAuthenticated, addNewBoard);
 
-router.route('/:id')
+router
+    .route('/:id')
     .get(getIndividualID)
-    .put(updateBoardByID)
-    .delete(deleteBoardByID);
+    .put(isAuthenticated, isAuthor, updateBoardByID)
+    .delete(isAuthenticated, isAuthor, deleteBoardByID);
 
 export default router;

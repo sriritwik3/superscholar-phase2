@@ -1,24 +1,35 @@
-import sqlite3 from 'sqlite3';
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
+import User from './userSchema.js';
 
-const db = new sqlite3.Database('./kanban_boards.db', (err) => {
-    if (err) {
-        console.error('Error opening database ' + err.message);
-    } else {
-        db.run(
-            'CREATE TABLE boards( \
-            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\
-            stage INTEGER NOT NULL,\
-            title NVARCHAR(100) NOT NULL\
-        )',
-            (err) => {
-                if (err) {
-                    console.log('Table boards already exists.');
-                    return;
-                }
-                console.log('Created boards table succesfully.');
-            }
-        );
-    }
+const boardSchema = new Schema({
+    id: {
+        type: Number,
+    },
+
+    stage: {
+        type: Number,
+    },
+
+    title: {
+        type: String,
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
 });
 
-export default db;
+// autoIncrement.initialize(connection);
+
+const board = mongoose.model('board', boardSchema);
+
+// boardSchema.plugin(autoIncrement.plugin, {
+//     model: 'board',
+//     field: 'id',
+//     startAt: 1,
+//     incrementBy: 1,
+// });
+
+
+export default board;

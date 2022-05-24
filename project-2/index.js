@@ -9,9 +9,11 @@ dotenv.config();
 import boardRoutes from "./routes/boards.route.js";
 import userRoutes from "./routes/users.route.js";
 import './config/database.js';
+import { authMiddleware } from './middleware.js';
 
 const app = express();
 
+app.use(authMiddleware);
 app.use(passport.initialize());
 app.use(
     helmet(),

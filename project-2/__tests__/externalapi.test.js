@@ -1,4 +1,5 @@
-import topArticles from '../utils/topArticles';
+import topArticles from '../part3_externalAPI/topArticles';
+
 
 describe("let's test", () => {
     test('somthing', () => {
