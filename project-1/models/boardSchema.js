@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3');
 
-const db = new sqlite3.Database('../kanban_boards.db', (err) => {
+const db = new sqlite3.Database('./kanban_boards.db', (err) => {
     if (err) {
         console.error('Error opening database ' + err.message);
     } else {
