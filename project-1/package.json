@@ -1,0 +1,26 @@
+{
+    "name": "kanban-boards",
+    "version": "1.0.0",
+    "description": "a basic rest api that exposes the boards endpoint",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "test-watch": "jest --watch",
+        "watch": "nodemon server.js",
+        "start": "node server.js"
+    },
+    "author": "ritwik",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.20.0",
+        "cors": "^2.8.5",
+        "express": "^4.18.1",
+        "helmet": "^5.1.0",
+        "morgan": "^1.10.0",
+        "sqlite3": "^5.0.8"
+    },
+    "devDependencies": {
+        "jest": "^28.1.0",
+        "supertest": "^6.2.3"
+    }
+}
